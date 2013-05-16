@@ -33,8 +33,24 @@
 */
 
 Route::get('/', function()
-{
-	return View::make('home.index');
+{	
+	// $users = User::all();
+
+	// return View::make('home.index')->with(array('users'=>$users));
+
+	// $user = new User;
+
+	// $user->email = 'jane@doe.com';
+	// $user->password = Hash::make('1224');
+
+	// $user->save();
+
+	User::create(array(
+			'email'=>'pimmeijer88@gmail.com',
+			'password'=>Hash::make('1234')
+		)
+	);
+
 });
 
 /*
