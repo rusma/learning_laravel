@@ -19,7 +19,7 @@
 			$shortened = base_convert(rand(10000,99999), 10, 36);
 
 			if(static::where_shortened($shortened)->first()) {
-				static::get_unique_short_url();
+				return static::get_unique_short_url();
 			}
 
 			return $shortened;
