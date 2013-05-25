@@ -32,61 +32,13 @@
 |
 */
 
-Route::get('/', function()
-{	
-	return View::make('home.index');
-});
+Route::get('about', 'home@about');
 
-Route::post('/', function() {
-	$url = Input::get('url');
+// Route::controller('home');
+// Route::controller('users');
+//or Route::controller(array('home', 'users'));
 
-	//validate url
-	$validation = Url::validate(array('url' => $url));
-
-	if( $validation !== true ) {
-		return Redirect::to('/')->with_errors($validation->errors);
-	}
-
-	//if url is already in the table return that
-	$record = Url::where_url($url)->first();
-
-	if( $record ) {
-		return View::make('home.result')->with('shortened', $record->shortened);
-	}
-
-	//otherwise add a new row and return the short url
-	$shortened = Url::get_unique_short_url();
-
-	$row = Url::create(array(
-			'url' => $url,
-			'shortened' => $shortened
-		)
-	);
-
-	//create a result view
-	if( $row ) {
-		return View::make('home.result')->with('shortened', $row->shortened);
-	} else { 
-		return View::make('home.result')->with('error', 'Woops, something went wrong');
-	}
- 
-
-});
-
-Route::get('(:any)', function($shortened){
-	//query db for this result
-	$row = Url::where_shortened($shortened)->first();
-
-	//if not found redirect homepage
-
-	if( is_null($row) ) {
-		return Redirect::to('/');
-	} else {
-		return Redirect::to($row->url);
-	}
-
-	//otherwise fetch url and redirect
-});
+Route::controller(Controller::detect());
 
 /*
 |--------------------------------------------------------------------------
