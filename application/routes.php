@@ -75,7 +75,7 @@
 
 // 	if( Auth::attempt($credentials) )
 // 	{
-// 		if( Auth::check() ) 
+// 		if( Auth::check() )
 // 		{
 // 			return 'User is already logged in!';
 // 		}
@@ -99,6 +99,38 @@
 // Route::get('/login', function(){
 // 	return 'Login Form';
 // });
+
+//ELOQUENT 201
+
+Route::get('/authors/(:num)/posts', function($id){
+	// Author::find(1)->posts()->insert(array(
+	// 	'title' => 'My second post',
+	// 	'body' => 'The body of my first poost'
+	// ));
+
+	// var_dump(Post::find(1)->author);
+
+	// Author::find(1)->posts()->insert(array(
+	// 	'title' => 'Post',
+	// 	'body' => 'Body of post'
+	// 	)
+	// );
+
+	// Author::find(1)->posts()->insert(array(
+	// 	'title' => 'Post 2',
+	// 	'body' => 'Body of post'
+	// 	)
+	// );
+	$posts = Author::find($id)->posts()->get();
+	
+	//eager loading!
+	$posts = Post::with('author')->where('author_id', '=', $id)->get();
+	return View::make('post.index')->with('posts', $posts);
+});
+
+Event::listen('laravel.query', function($sql){
+	var_dump($sql);
+});
 
 Event::listen('404', function()
 {

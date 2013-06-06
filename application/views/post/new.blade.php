@@ -1,0 +1,1 @@
+This is the D:\xampp\htdocs\learning_laravel\application\views/post/new.blade.php view
