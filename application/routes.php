@@ -42,12 +42,14 @@
 // Route::get('users/(:any)/edit', 'users@edit');
 
 
+//NAMED CONTROLLERS
+// Route::get('movies', array('as'=>'movies', 'uses'=>'movies@index'));
+// Route::get('movies/(:any)', array('as'=>'movie', 'uses'=>'movies@show'));
+// Route::get('movies/new', array('as'=>'new_movie', 'uses'=>'movies@new'));
 
-Route::get('movies', array('as'=>'movies', 'uses'=>'movies@index'));
-Route::get('movies/(:any)', array('as'=>'movie', 'uses'=>'movies@show'));
-Route::get('movies/new', array('as'=>'new_movie', 'uses'=>'movies@new'));
+// Route::controller(Controller::detect());
 
-Route::controller(Controller::detect());
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
@@ -64,6 +66,40 @@ Route::controller(Controller::detect());
 |
 */
 
+//AUTH LESSONS
+// Route::get('/', function(){
+// 	$credentials = array(
+// 		'username' => 'pimmeijer@outlook.com',
+// 		'password' => 'test'
+// 	);
+
+// 	if( Auth::attempt($credentials) )
+// 	{
+// 		if( Auth::check() ) 
+// 		{
+// 			return 'User is already logged in!';
+// 		}
+
+// 		return 'User acknowledged';
+// 	}
+// 	return 'No accoutn for you';
+// });
+
+// Route::get('/logout', function(){
+// 	Auth::logout();
+// 	return 'logged out';
+// });
+
+// Route::get('/admin', array('before'=>'auth', function() {
+// 	$user = Auth::user();
+// 	return 'Private adimn section ' . $user->name;
+// 	})
+// );
+
+// Route::get('/login', function(){
+// 	return 'Login Form';
+// });
+
 Event::listen('404', function()
 {
 	return Response::error('404');
@@ -73,16 +109,7 @@ Event::listen('500', function($exception)
 {
 	return Response::error('500');
 });
-
-/*
-|--------------------------------------------------------------------------
-| Route Filters
-|--------------------------------------------------------------------------
-|
-| Filters provide a convenient method for attaching functionality to your
-| routes. The built-in before and after filters are called before and
-| after every request to your application, and you may even create
-| other filters that can be attached to individual routes.
+ /* |-------------------------------------------------------------------------- | Route Filters |-------------------------------------------------------------------------- | | Filters provide a convenient method for attaching functionality to your | routes. The built-in before and after filters are called before and | after every request to your application, and you may even create | other filters that can be attached to individual routes.
 |
 | Let's walk through an example...
 |
