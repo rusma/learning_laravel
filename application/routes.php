@@ -38,8 +38,8 @@ Route::get('about', 'home@about');
 // Route::controller('users');
 //or Route::controller(array('home', 'users'));
 
+Route::get('users/(:any)/edit', 'users@edit');
 Route::controller(Controller::detect());
-
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
