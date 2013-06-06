@@ -32,13 +32,21 @@
 |
 */
 
-Route::get('about', 'home@about');
+//RESTFUL LESSONS ROUTES
+// Route::get('about', 'home@about');
 
-// Route::controller('home');
-// Route::controller('users');
-//or Route::controller(array('home', 'users'));
+// // Route::controller('home');
+// // Route::controller('users');
+// //or Route::controller(array('home', 'users'));
 
-Route::get('users/(:any)/edit', 'users@edit');
+// Route::get('users/(:any)/edit', 'users@edit');
+
+
+
+Route::get('movies', array('as'=>'movies', 'uses'=>'movies@index'));
+Route::get('movies/(:any)', array('as'=>'movie', 'uses'=>'movies@show'));
+Route::get('movies/new', array('as'=>'new_movie', 'uses'=>'movies@new'));
+
 Route::controller(Controller::detect());
 /*
 |--------------------------------------------------------------------------

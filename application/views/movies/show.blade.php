@@ -1,0 +1,1 @@
+This is the D:\xampp\htdocs\learning_laravel\application\views/movie/show.blade.php view
